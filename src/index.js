@@ -19,7 +19,7 @@ import { firebaseConfig } from "../config";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-const Otp = () => {
+const OTP = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [code, setCode] = useState("");
   const [verificationId, setVerificationId] = useState(null);
@@ -28,7 +28,7 @@ const Otp = () => {
   const sendVerification = () => {
     const phoneProvider = new PhoneAuthProvider(auth);
     phoneProvider
-      .verifyPhoneNumber(phoneNumber, recaptchaVerifier.current)
+      .verifyPhoneNumber("+82" + phoneNumber, recaptchaVerifier.current)
       .then((vid) => {
         setVerificationId(vid);
         setPhoneNumber("");
@@ -60,6 +60,7 @@ const Otp = () => {
       />
       <Text style={styles.otpText}>Login using OTP</Text>
       <TextInput
+        placeholderTextColor="#fff"
         placeholder="Phone Number With Country code"
         onChangeText={setPhoneNumber}
         keyboardType="phone-pad"
@@ -73,6 +74,7 @@ const Otp = () => {
         <Text style={styles.buttonText}>Send verification</Text>
       </TouchableOpacity>
       <TextInput
+        placeholderTextColor="#fff"
         placeholder="Confirm Code"
         onChangeText={setCode}
         keyboardType="number-pad"
@@ -85,7 +87,7 @@ const Otp = () => {
   );
 };
 
-export default Otp;
+export default OTP;
 
 const styles = StyleSheet.create({
   container: {
@@ -104,6 +106,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "center",
     color: "#fff",
+    placeholderTextColor: "#888",
   },
   sendVerification: {
     padding: 20,
